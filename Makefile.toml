@@ -1,0 +1,9 @@
+[config]
+skip_core_tasks = true
+default_to_workspace = false
+
+[tasks.test]
+description = "Runs all tests"
+command = "cargo"
+args = ["test", "--all", "--tests", "--", "--nocapture"]
+env_files = ["./.env"]
