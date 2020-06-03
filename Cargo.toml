@@ -5,3 +5,10 @@ authors = ["enfipy <enfipy@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+egg-mode = { version = "0.14", features = ["hyper-rustls"], default-features = false }
+tokio = "0.2.8"
+futures = "0.3"
+
+[dev-dependencies]
+log = "0.4.8"
+pretty_env_logger = "0.3"
