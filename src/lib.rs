@@ -84,12 +84,24 @@ mod tests {
         let access_token = std::env::var("ACCESS_TOKEN").expect("ACCESS_TOKEN should be set");
         let access_secret = std::env::var("ACCESS_SECRET").expect("ACCESS_SECRET should be set");
 
-        let token = get_token(consumer_key, consumer_secret, access_token, access_secret);
-        println!("Token: {:?}", token);
-        let user = get_token_user(&token).await.unwrap();
-        println!("User: {:?}", user.screen_name);
+        let con_token = KeyPair::new(consumer_key, consumer_secret);
+        // let con_token = KeyPair::new(access_token, access_secret);
+        let request_token = egg_mode::request_token(&con_token, "oob").await.unwrap();
+        // let url = egg_mode::authenticate_url(&request_token);
+        let url = egg_mode::authorize_url(&request_token);
+        println!("{}", url);
+        // let pass = "bla-bla";
+        // let (token, user_id, screen_name) =
+        //     egg_mode::access_token(con_token, &request_token, &pass)
+        //         .await
+        //         .unwrap();
 
-        get_retweeters(1263974008900382721, &token).await.unwrap();
+        // let token = get_token(consumer_key, consumer_secret, access_token, access_secret);
+        // println!("Token: {:?}", token);
+        // let user = get_token_user(&token).await.unwrap();
+        // println!("User: {:?}", user.screen_name);
+
+        // get_retweeters(1263974008900382721, &token).await.unwrap();
         // get_retweeters_map(1263974008900382721, &token)
         //     .await
         //     .unwrap();
